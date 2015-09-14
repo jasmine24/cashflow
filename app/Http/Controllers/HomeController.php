@@ -1,4 +1,10 @@
 <?php namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+use App\Item;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use View;
 
 class HomeController extends Controller {
 
@@ -30,6 +36,13 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+        $items = Item::orderBy('item_name', 'asc')->get();
+        return view('home',compact('items'));
 	}
+
+    public function add(){
+        //add the item to the transaction log
+        $items = Item::orderBy('item_name', 'asc')->get();
+        return view('home',compact('items'));
+    }
 }

@@ -58,6 +58,19 @@
                                  <th>Quantity</th>
                               </tr>
                           </thead>
+                          <tbody>
+                          @foreach ($items as $item)
+                            <tr>
+                                <td class="col-md-4">{{ $item->item_name }}</td>
+                      			<td class="col-md-2">{{ $item->price }}</td>
+                                <td class="col-md-2">{{ $item->quantity }}</td>
+                                {!! Form::model($item, ['method' => 'GET', 'action' => ['HomeController@add', $item->id]]) !!}
+                                            <td class="col-md-1"><button type="submit" class="glyphicon glyphicon-plus"
+                                            style="border:none; background-color:Transparent"></button></td>
+                                {!! Form::close() !!}
+                            </tr>
+                          @endforeach
+                          </tbody>
     				</div>
     			</div>
     		</div>

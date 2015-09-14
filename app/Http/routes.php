@@ -35,3 +35,5 @@ Route::post('inventory/add', 'InventoryController@store');
 Route::delete('inventory/destroy/{id?}', 'InventoryController@destroy');
 Route::get('inventory/edit/{id?}', 'InventoryController@edit');
 Route::post('inventory/update/{id?}', 'InventoryController@update');
+//Home
+Route::get('home/add/{id?}','HomeController@add');
