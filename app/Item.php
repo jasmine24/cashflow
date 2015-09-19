@@ -8,6 +8,6 @@ class Item extends Model {
     protected $table = 'items';
 
     //items mass assignable
-    protected $fillable = ['item_name','sku','price','quantity'];
+    protected $fillable = ['item_name','sku','price','quantity', 'user'];
 
 }

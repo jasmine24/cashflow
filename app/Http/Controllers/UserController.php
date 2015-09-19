@@ -7,6 +7,7 @@ use Redirect;
 use Input;
 use App\User;
 use Validator;
+use Hash;
 
 class UserController extends Controller {
 
@@ -50,6 +51,7 @@ class UserController extends Controller {
             ]
         );
 
+        $input['password'] = Hash::make(Input::get('password'));
         if($validator->fails()){
             return Redirect::back()->withErrors($validator)->withInput();
         }
@@ -117,7 +119,7 @@ class UserController extends Controller {
         $validator = Validator::make(
             $input,
             [
-                'email' => 'required|email|min:8',
+                'email' => 'required',
                 'password' => 'required',
             ]
         );

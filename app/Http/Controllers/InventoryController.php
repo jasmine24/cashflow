@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use View;
+use App\User;
+use Auth;
 
 class InventoryController extends Controller {
 
@@ -16,10 +18,11 @@ class InventoryController extends Controller {
 	 */
 	public function index()
 	{
+        $userid = Auth::id();
         $items = Item::orderBy('item_name', 'asc')->get();
         $editInput = null;
-        $totalValue = Item::sum('price');
-        $totalQuantity = Item::sum('quantity');
+        $totalValue = Item::where('user', $userid)->sum('price');
+        $totalQuantity = Item::where('user', $userid)->sum('quantity');
         return view('inventory', compact('items', 'editInput', 'totalValue', 'totalQuantity'));
 	}
 
@@ -41,8 +44,9 @@ class InventoryController extends Controller {
 	public function store(Request $request)
 	{
         //$input = Request::all();
-        $this->validate($request, ['item_name' => 'required|unique:items,item_name', 'sku' => 'required|numeric|unique:items,sku',
-                            'price' => 'required', 'quantity' => 'required|numeric']);
+        $request->merge(['user' => Auth::id()]);
+        $this->validate($request, ['item_name' => 'required', 'sku' => 'required|numeric|unique:items,sku',
+                            'price' => 'required', 'quantity' => 'required|numeric', 'user' => 'required']);
         Item::create($request->all());
         return redirect('inventory');
 
@@ -72,17 +76,19 @@ class InventoryController extends Controller {
 	 */
     public function edit($id)
     {
+        $userid = Auth::id();
         $items = Item::orderBy('item_name', 'asc')->get();
         $editInput = Item::findOrFail($id);
-        $totalValue = Item::sum('price');
-        $totalQuantity = Item::sum('quantity');
+        $totalValue = Item::where('user', $userid)->sum('price');
+        $totalQuantity = Item::where('user', $userid)->sum('quantity');
         return view('inventory', compact('items', 'editInput', 'totalValue', 'totalQuantity'));
     }
 
 	public function update($id, Request $request)
 	{
+        $request->merge(['user' => Auth::id()]);
         $this->validate($request, ['item_name' => 'required', 'sku' => 'required|numeric',
-            'price' => 'required', 'quantity' => 'required|numeric']);
+            'price' => 'required', 'quantity' => 'required|numeric', 'user' => 'required']);
         Item::findOrFail($id)->update($request->all());
         return redirect('inventory');
 	}

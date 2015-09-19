@@ -21,20 +21,22 @@
 
                       <tbody>
                       @foreach ($items as $item)
-                      		<tr>
-                      			<td class="col-md-4">{{ $item->item_name }}</td>
-                      			<td class="col-md-2">{{ $item->sku }}</td>
-                      			<td class="col-md-2">{{ $item->price }}</td>
-                                <td class="col-md-2">{{ $item->quantity }}</td>
-                                {!! Form::model($item, ['method' => 'GET', 'action' => ['InventoryController@edit', $item->id]]) !!}
-                                            <td class="col-md-1"><button type="submit" class="glyphicon glyphicon-pencil"
-                                            style="border:none; background-color:Transparent"></button></td>
-                                {!! Form::close() !!}
-                                {!! Form::model($item, ['method' => 'DELETE', 'action' => ['InventoryController@destroy', $item->id]]) !!}
-                                            <td class="col-md-1"><button type="submit" class="glyphicon glyphicon-remove"
-                                            style="border:none; background-color:Transparent"></button></td>
-                                {!! Form::close() !!}
-                            </tr>
+                            @if($item->user == Auth::id())
+                                <tr>
+                                    <td class="col-md-4">{{ $item->item_name }}</td>
+                                    <td class="col-md-2">{{ $item->sku }}</td>
+                                    <td class="col-md-2">{{ $item->price }}</td>
+                                    <td class="col-md-2">{{ $item->quantity }}</td>
+                                    {!! Form::model($item, ['method' => 'GET', 'action' => ['InventoryController@edit', $item->id]]) !!}
+                                                <td class="col-md-1"><button type="submit" class="glyphicon glyphicon-pencil"
+                                                style="border:none; background-color:Transparent"></button></td>
+                                    {!! Form::close() !!}
+                                    {!! Form::model($item, ['method' => 'DELETE', 'action' => ['InventoryController@destroy', $item->id]]) !!}
+                                                <td class="col-md-1"><button type="submit" class="glyphicon glyphicon-remove"
+                                                style="border:none; background-color:Transparent"></button></td>
+                                    {!! Form::close() !!}
+                                </tr>
+                            @endif
                       	@endforeach
                       	    <tr class="active">
                       	        <td></td>

@@ -14,16 +14,29 @@
                              <th>Price</th>
                              <th>Quantity</th>
                              <th>Total</th>
-                             <th>Edit</th>
                              <th>Delete</th>
                           </tr>
                       </thead>
 
                       <tbody>
+                     @foreach ($transactionItems as $item)
+                            <tr>
+                                <td class="col-md-4">{{ $item->item_name }}</td>
+                                <td class="col-md-2">{{ $item->price }}</td>
+                                <td class="col-md-2">{{ $item->quantity }}</td>
+                                <td class="col-md-2">{{ $item->quantity*$item->price }}</td>
+                                {!! Form::model($item, ['method' => 'DELETE', 'action' => ['HomeController@destroy', $item->id]]) !!}
+                                            <td class="col-md-1"><button type="submit" class="glyphicon glyphicon-remove"
+                                            style="border:none; background-color:Transparent"></button></td>
+                                {!! Form::close() !!}
+                            </tr>
+                      	@endforeach
                         <tr class="active">
                             <td></td>
                             <td><strong>Total Value:</strong></td>
+                            <td>{{$totalValue}}</td>
                             <td><strong>Total Quantity:</strong></td>
+                            <td>{{$totalQuantity}}</td>
                             <td></td>
                          </tr>
                       </tbody>
