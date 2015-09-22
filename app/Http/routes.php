@@ -38,3 +38,7 @@ Route::post('inventory/update/{id?}', 'InventoryController@update');
 //Home
 Route::get('home/add/{id?}','HomeController@add');
 Route::delete('home/destroy/{id?}', 'HomeController@destroy');
+//Checkout
+Route::get('checkout', 'CheckoutController@index');
+Route::post('checkout/charge/{id?}', 'CheckoutController@charge');
+Route::post('checkout/complete/{id?}', 'CheckoutController@complete');

@@ -4,15 +4,16 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('components/bootstrap-material-design-master/dist/css/material.min.css')
        }}" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <!-- JS link -->
     <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
     <!-- X-edit link -->
     <link href="{{ asset('components/bootstrap3-editable-1.5.1/bootstrap3-editable/css/bootstrap-editable.css') }}" rel="stylesheet">
     <script src="{{ asset('components/bootstrap3-editable-1.5.1/bootstrap3-editable/js/bootstrap-editable.js') }}"></script>

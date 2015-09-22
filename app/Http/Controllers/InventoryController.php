@@ -49,13 +49,6 @@ class InventoryController extends Controller {
                             'price' => 'required', 'quantity' => 'required|numeric', 'user' => 'required']);
         Item::create($request->all());
         return redirect('inventory');
-
-        /*
-        $item = new Item;
-        $item->item_name =  $input['item_name'];
-        $item->sku = $input['sku'];
-        $item->price = $input['price'];
-        $item->quantity = $input['quantity'];*/
 	}
 
 	/**
