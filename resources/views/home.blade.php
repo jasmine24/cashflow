@@ -19,7 +19,7 @@
 
 				<div class="panel-heading">Transaction Log</div>
 				<div class="panel-body">
-                    <table class="table table-hover">
+                    <table class="table table-hover col-md-12">
                       <thead>
                           <tr>
                              <th>Item Name</th>
@@ -33,7 +33,7 @@
                       <tbody>
                      @if(count($transactionItems) == 0)
                          <tr>
-                            <td class="col-md-12">Add items from inventory to begin transaction.</td>
+                            <td class="col-md-12">Add items from inventory to begin a transaction.</td>
                          </tr>
                      @endif
                      @foreach ($transactionItems as $item)
@@ -49,25 +49,25 @@
                             </tr>
                       @endforeach
                         <tr>
-                            <td></td>
-                            <td><strong>Subtotal:</strong></td>
-                            <td>{{$totalValue}}</td>
-                            <td></td>
-                            <td></td>
+                            <td class="col-md-4"></td>
+                            <td class="col-md-2"><strong>Subtotal:</strong></td>
+                            <td class="col-md-2">{{$totalValue}}</td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
                          </tr>
                          <tr>
-                            <td></td>
-                            <td><strong>Tax {{'('.$tax.'%) '}}:</strong></td>
-                            <td>{{$totalValue*$tax}}</td>
-                            <td></td>
-                            <td></td>
+                            <td class="col-md-4"></td>
+                            <td class="col-md-2"><strong>Tax {{'('.$tax.'%) '}}:</strong></td>
+                            <td class="col-md-2">{{$totalValue*$tax}}</td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
                          </tr>
                          <tr class="active">
-                            <td></td>
-                            <td><strong>Total:</strong></td>
-                            <td>{{$totalValue*$tax+$totalValue}}</td>
-                            <td><strong>Total Quantity:</strong></td>
-                            <td>{{$totalQuantity}}</td>
+                            <td class="col-md-4"></td>
+                            <td class="col-md-2"><strong>Total:</strong></td>
+                            <td class="col-md-2">{{$totalValue*$tax+$totalValue}}</td>
+                            <td class="col-md-2"><strong>Total Quantity:</strong></td>
+                            <td class="col-md-2">{{$totalQuantity}}</td>
                          </tr>
                       </tbody>
                     </table>

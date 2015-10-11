@@ -11,8 +11,8 @@
 |
 */
 
-use App\Http\Controllers\InventoryController;
 
+Route::get('connect_to_db/{content}/{format}', 'WelcomeController@connectdb');
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
@@ -35,6 +35,7 @@ Route::post('inventory/add', 'InventoryController@store');
 Route::delete('inventory/destroy/{id?}', 'InventoryController@destroy');
 Route::get('inventory/edit/{id?}', 'InventoryController@edit');
 Route::post('inventory/update/{id?}', 'InventoryController@update');
+Route::post('inventory/skuscan', 'InventoryController@skuscan');
 //Home
 Route::get('home/add/{id?}','HomeController@add');
 Route::delete('home/destroy/{id?}', 'HomeController@destroy');
@@ -42,3 +43,5 @@ Route::delete('home/destroy/{id?}', 'HomeController@destroy');
 Route::get('checkout', 'CheckoutController@index');
 Route::post('checkout/charge/{id?}', 'CheckoutController@charge');
 Route::post('checkout/complete/{id?}', 'CheckoutController@complete');
+
+

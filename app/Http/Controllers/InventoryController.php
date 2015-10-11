@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use View;
 use App\User;
+use App\Scan;
 use Auth;
 
 class InventoryController extends Controller {
@@ -21,9 +22,15 @@ class InventoryController extends Controller {
         $userid = Auth::id();
         $items = Item::orderBy('item_name', 'asc')->get();
         $editInput = null;
+        $skuscan = null;
+        $email = User::where('id', $userid)->first()->email;
+        $scan = Scan::where('userEmail', $email)->first();
+        if($scan){
+            $skuscan = $scan;
+        }
         $totalValue = Item::where('user', $userid)->sum('price');
         $totalQuantity = Item::where('user', $userid)->sum('quantity');
-        return view('inventory', compact('items', 'editInput', 'totalValue', 'totalQuantity'));
+        return view('inventory', compact('items', 'editInput', 'totalValue', 'totalQuantity', 'skuscan'));
 	}
 
 	/**
@@ -48,6 +55,11 @@ class InventoryController extends Controller {
         $this->validate($request, ['item_name' => 'required', 'sku' => 'required|numeric|unique:items,sku',
                             'price' => 'required', 'quantity' => 'required|numeric', 'user' => 'required']);
         Item::create($request->all());
+
+        //delete scanner
+        $email = User::where('id', Auth::id())->first()->email;
+        $scan = Scan::where('userEmail', $email)->delete();
+
         return redirect('inventory');
 	}
 
@@ -72,9 +84,15 @@ class InventoryController extends Controller {
         $userid = Auth::id();
         $items = Item::orderBy('item_name', 'asc')->get();
         $editInput = Item::findOrFail($id);
+        $skuscan = null;
+        $email = User::where('id', $userid)->first()->email;
+        $scan = Scan::where('userEmail', $email)->first();
+        if($scan){
+            $skuscan = $scan;
+        }
         $totalValue = Item::where('user', $userid)->sum('price');
         $totalQuantity = Item::where('user', $userid)->sum('quantity');
-        return view('inventory', compact('items', 'editInput', 'totalValue', 'totalQuantity'));
+        return view('inventory', compact('items', 'editInput', 'totalValue', 'totalQuantity', 'skuscan'));
     }
 
 	public function update($id, Request $request)
@@ -98,5 +116,4 @@ class InventoryController extends Controller {
         $item->delete();
         return redirect('inventory');
 	}
-
 }

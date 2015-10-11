@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 use Auth;
+use Illuminate\Http\Request;
+use App\Scan;
 class WelcomeController extends Controller {
 
 	/*
@@ -38,4 +40,15 @@ class WelcomeController extends Controller {
         }
 	}
 
+    public function connectdb($content, $format)
+    {
+        $scanFormat = $format;
+        $scanContent = $content;
+        $user = 'emily.thorn@gmail.com';
+        $type = 'inventory';
+        if($scanFormat && $scanContent != null){
+            Scan::create(array('userEmail' => $user,
+                                'sku' => $content,
+                                'type' => $type));}
+    }
 }

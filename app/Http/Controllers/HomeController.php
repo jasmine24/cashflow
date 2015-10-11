@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Scan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
